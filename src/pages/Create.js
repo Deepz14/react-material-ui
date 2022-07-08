@@ -19,7 +19,7 @@ export default function Create() {
         variant="contained" 
         color="secondary"
         endIcon={<SendIcon />}>
-        Send
+        Submit
       </Button>
     </Container>
   )
