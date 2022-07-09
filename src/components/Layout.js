@@ -9,28 +9,10 @@ import ListItemText from '@mui/material/ListItemText';
 import AddCircleOutlineOutlined from '@mui/icons-material/AddCircleOutlineOutlined';
 import SubjectOutlined from '@mui/icons-material/SubjectOutlined';
 import { useHistory, useLocation } from 'react-router-dom'
-import { makeStyles } from '@mui/styles';
-
+import {Root, MainContent} from './styled/LayoutStyled';
 const drawerWidth = 240;
 
-const useStyle = makeStyles({
-  page: {
-    background: '#f9f9f9',
-    width: '100%',
-  },
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    width: drawerWidth,
-  },
-  active: {
-    background: '#f4f4f4'
-  },
-})
-
 function Layout({children}) {
-  const classes = useStyle();
   const history = useHistory();
   const location = useLocation();
 
@@ -48,17 +30,17 @@ function Layout({children}) {
   ];
 
   return (
-    <div className={classes.root}>
+    <Root>
         {/* App Bar */}
-        {/* <AppBar
+        <AppBar
           elevation={0}
           position="fixed"
-          sx={{ width: `calc(100% - ${drawerWidth}px)`, padding: `10px 0 10px 5px`}}
+          sx={{ width: `calc(100% - ${drawerWidth}px)`, padding: `0 0 8px 0`, background: '#f8f5f9'}}
          >
-          <Typography variant="h5" noWrap component="div">
-            Ninja Notes
-          </Typography>
-        </AppBar> */}
+           <Typography variant="h5" noWrap component="div" textAlign={'right'} sx={{padding: '10px 25px 5px 10px'}}>
+              Ninja Notes
+            </Typography>
+        </AppBar>
 
         {/* side bar */}
         <Drawer
@@ -74,7 +56,7 @@ function Layout({children}) {
             anchor="left"
         >
           <div>
-            <Typography variant="h5" noWrap component="div">
+            <Typography variant="h5" noWrap component="div" sx={{padding: '10px 0 5px 20px'}}>
               Ninja Notes
             </Typography>
           </div>
@@ -84,7 +66,9 @@ function Layout({children}) {
               button 
               key={item.text} 
               onClick={() => history.push(item.path)}
-              className={location.pathname == item.path ? classes.active : null}
+              sx={{
+                background: location.pathname == item.path ? '#efcef0' : null
+              }}
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
@@ -94,10 +78,10 @@ function Layout({children}) {
         </Drawer>
 
         {/* Main content */}
-        <div className={classes.page}>
-            {children}
-        </div>
-    </div>
+        <MainContent>
+          {children}
+        </MainContent>
+    </Root>
   )
 }
 

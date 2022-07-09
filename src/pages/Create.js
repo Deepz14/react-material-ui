@@ -9,20 +9,10 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { makeStyles } from '@mui/styles';
 import { useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles({
-  field: {
-    marginTop: 20,
-    marginBottom: 20,
-    display: 'block'
-  }
-})
 
 export default function Create() {
-
-  const classes = useStyles();
 
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
@@ -65,7 +55,7 @@ export default function Create() {
       </Typography>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <TextField
-          className={classes.field}
+          sx={{marginTop: 5, display: 'block'}}
           onChange={(e) => setTitle(e.target.value)}
           color="secondary"
           label="Note title"
@@ -77,7 +67,6 @@ export default function Create() {
         <br />
         <br />
         <TextField
-          className={classes.field}
           onChange={(e) => setDetails(e.target.value)}
           color="secondary"
           label="Details"
@@ -88,8 +77,8 @@ export default function Create() {
           required
           error={detailsError}
         />
-        <br />
-        <FormControl className={classes.field}>
+       
+        <FormControl sx={{marginTop: 5,  marginBottom: 5, display: 'block'}}>
           <FormLabel>Note category</FormLabel>
           <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
             <FormControlLabel value="money" control={<Radio color='secondary' />} label="Money" />
@@ -98,7 +87,6 @@ export default function Create() {
             <FormControlLabel value="work" control={<Radio color='secondary' />} label="Work" />
           </RadioGroup>
         </FormControl>
-        <br />
         <Button
           type="submit"
           variant="contained" 
