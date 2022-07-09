@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import NoteComponent from '../components/NoteComponent';
 
 export default function Notes() {
 
@@ -11,13 +12,18 @@ export default function Notes() {
     .catch(err => console.log(err))
   }, []);
 
+  const handleDelete = async(id) => {
+    await fetch('http://localhost:5000/notes/' + id, {
+      method: 'DELETE'
+    });
+
+    let newNotes = notes.filter(note => note.id !== id);
+    setNotes(newNotes);
+  }
+
   return (
     <div>
-      {
-        notes.map(note => (
-          <p key={note.id}>{note.title}</p>
-        ))
-      }
+      <NoteComponent notes={notes} handleDelete={handleDelete} />
     </div>
   )
 }
