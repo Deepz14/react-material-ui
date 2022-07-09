@@ -6,14 +6,14 @@ export default function Notes() {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/notes')
+    fetch('http://localhost:8000/notes')
     .then(res => res.json())
     .then(data => setNotes(data))
     .catch(err => console.log(err))
   }, []);
 
   const handleDelete = async(id) => {
-    await fetch('http://localhost:5000/notes/' + id, {
+    await fetch('http://localhost:8000/notes/' + id, {
       method: 'DELETE'
     });
 
